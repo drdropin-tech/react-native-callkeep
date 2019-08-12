@@ -254,6 +254,9 @@ RCT_EXPORT_METHOD(setMutedCall:(NSString *)uuidString muted:(BOOL)muted)
                 callUpdate.supportsGrouping = YES;
                 callUpdate.supportsUngrouping = YES;
                 [self.callKeepProvider reportCallWithUUID:startCallAction.callUUID updated:callUpdate];
+            } else if([[transaction.actions firstObject] isKindOfClass:[CXEndCallAction class]]) {
+                CXEndCallAction *endCallAction = [transaction.actions firstObject];
+                [self.callKeepProvider reportCallWithUUID:endCallAction.callUUID endedAtDate:nil reason:CXCallEndedReasonRemoteEnded ];
             }
         }
     }];
