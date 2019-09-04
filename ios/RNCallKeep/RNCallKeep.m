@@ -311,9 +311,6 @@ RCT_EXPORT_METHOD(sendDTMF:(NSString *)uuidString dtmf:(NSString *)key)
                 callUpdate.supportsGrouping = YES;
                 callUpdate.supportsUngrouping = YES;
                 [self.callKeepProvider reportCallWithUUID:startCallAction.callUUID updated:callUpdate];
-            } else if([[transaction.actions firstObject] isKindOfClass:[CXEndCallAction class]]) {
-                CXEndCallAction *endCallAction = [transaction.actions firstObject];
-                [self.callKeepProvider reportCallWithUUID:endCallAction.callUUID endedAtDate:nil reason:CXCallEndedReasonRemoteEnded ];
             }
         }
     }];
