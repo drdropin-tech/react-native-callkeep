@@ -159,6 +159,10 @@ export default class RNCallKeep {
 
   }
 
+  static checkPhoneAccountPermission(): Promise<boolean> {
+
+  }
+
   /**
      * @description setAvailable method is available only on Android.
   */

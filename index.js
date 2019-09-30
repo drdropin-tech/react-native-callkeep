@@ -124,6 +124,9 @@ class RNCallKeep {
       ? RNCallKeepModule.checkSpeaker()
       : Promise.reject('RNCallKeep.checkSpeaker was called from unsupported OS');
 
+
+  checkPhoneAccountPermission = async (options) => await RNCallKeepModule.checkPhoneAccountPermission(options.additionalPermissions || []);
+
   setAvailable = (state) => {
     if (isIOS) {
       return;
