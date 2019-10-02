@@ -44,6 +44,12 @@ class RNCallKeep {
     return;
   };
 
+  hasRequiredPermissions = async (options) => {
+    this.setup(options);
+
+    return await this.hasPhoneAccount();
+  }
+
   displayIncomingCall = (uuid, handle, localizedCallerName, handleType = 'number', hasVideo = false) => {
     if (!isIOS) {
       RNCallKeepModule.displayIncomingCall(uuid, handle, localizedCallerName);

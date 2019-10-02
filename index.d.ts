@@ -55,6 +55,10 @@ export default class RNCallKeep {
 
   }
 
+  static async hasRequiredPermissions(options: IOptions): Promise<boolean> {
+
+  }
+
   static displayIncomingCall(
     uuid: string,
     handle: string,
