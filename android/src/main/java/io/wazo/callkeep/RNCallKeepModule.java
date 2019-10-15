@@ -214,7 +214,7 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void checkPhoneAccountPermission(ReadableArray optionalPermissions, Promise promise) {
-        Activity currentActivity = this.getCurrentActivity();
+        Activity currentActivity = getCurrentActivity();
 
         if (!isConnectionServiceAvailable()) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "ConnectionService not available for this version of Android.");
@@ -464,7 +464,7 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     }
 
     private Boolean hasPermissions() {
-        Activity currentActivity = this.getCurrentActivity();
+        Activity currentActivity = getCurrentActivity();
 
         boolean hasPermissions = true;
         for (String permission : permissions) {
