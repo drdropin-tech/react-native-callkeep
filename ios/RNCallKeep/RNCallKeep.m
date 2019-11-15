@@ -566,7 +566,7 @@ RCT_EXPORT_METHOD(reportUpdatedCall:(NSString *)uuidString contactIdentifier:(NS
     NSLog(@"[RNCallKeep][CXProviderDelegate][provider:performAnswerCallAction]");
 #endif
     [self configureAudioSession];
-    [self sendEventWithName:RNCallKeepPerformAnswerCallAction body:@{ @"callUUID": [action.callUUID.UUIDString lowercaseString] }];
+    [self sendEventWithName:RNCallKeepPerformAnswerCallAction body:@{ @"callUUID": [action.callUUID.UUIDString lowercaseString], @"isLocked": [[UIApplication sharedApplication] isProtectedDataAvailable] ? @"false" : @"true" }];
     [action fulfill];
 }
 
