@@ -43,10 +43,12 @@ class RNCallKeep {
 
     return;
   };
-
+  
   hasRequiredPermissions = async (options) => {
-    this.setup(options);
-
+    if(isIOS) {
+      return true
+    }
+    RNCallKeepModule.setup(options);
     return await this.hasPhoneAccount();
   }
 
