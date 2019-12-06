@@ -46,7 +46,7 @@ class RNCallKeep {
   
   hasRequiredPermissions = async (options) => {
     if(isIOS) {
-      return true
+      return true;
     }
     RNCallKeepModule.setup(options);
     return await this.hasPhoneAccount();
