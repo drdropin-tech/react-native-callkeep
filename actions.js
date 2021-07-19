@@ -14,6 +14,9 @@ const RNCallKeepDidToggleHoldAction = 'RNCallKeepDidToggleHoldAction';
 const RNCallKeepDidPerformDTMFAction = 'RNCallKeepDidPerformDTMFAction';
 const RNCallKeepProviderReset = 'RNCallKeepProviderReset';
 const RNCallKeepCheckReachability = 'RNCallKeepCheckReachability';
+const RNCallKeepDidLoadWithEvents = 'RNCallKeepDidLoadWithEvents';
+const RNCallKeepShowIncomingCallUi = 'RNCallKeepShowIncomingCallUi';
+const RNCallKeepOnSilenceIncomingCall = 'RNCallKeepOnSilenceIncomingCall';
 const isIOS = Platform.OS === 'ios';
 
 const didReceiveStartCallAction = handler => {
@@ -55,6 +58,17 @@ const didResetProvider = handler =>
 const checkReachability = handler =>
   eventEmitter.addListener(RNCallKeepCheckReachability, handler);
 
+const didLoadWithEvents = handler =>
+  eventEmitter.addListener(RNCallKeepDidLoadWithEvents, handler);
+
+const showIncomingCallUi = handler =>
+  eventEmitter.addListener(RNCallKeepShowIncomingCallUi, (data) => handler(data));
+
+const silenceIncomingCall = handler =>
+  eventEmitter.addListener(RNCallKeepOnSilenceIncomingCall, (data) => handler(data));
+
+export const emit = (eventName, payload) => eventEmitter.emit(eventName, payload);
+
 export const listeners = {
   didReceiveStartCallAction,
   answerCall,
@@ -67,4 +81,7 @@ export const listeners = {
   didPerformDTMFAction,
   didResetProvider,
   checkReachability,
+  didLoadWithEvents,
+  showIncomingCallUi,
+  silenceIncomingCall
 };
