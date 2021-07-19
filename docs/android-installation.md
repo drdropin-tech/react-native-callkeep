@@ -60,7 +60,6 @@ public class MainActivity extends ReactActivity {
 
 1. In `android/app/src/main/AndroidManifest.xml` add these permissions:
 
-
 ```xml
 <uses-permission android:name="android.permission.BIND_TELECOM_CONNECTION_SERVICE"/>
 <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -71,7 +70,13 @@ public class MainActivity extends ReactActivity {
     // ...
     <service android:name="io.wazo.callkeep.VoiceConnectionService"
         android:label="Wazo"
-        android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE">
+        android:permission="android.permission.BIND_TELECOM_CONNECTION_SERVICE"
+        // Use this to target android >= 11
+        android:foregroundServiceType="camera|microphone"
+        // For android < 11
+        android:foregroundServiceType="phoneCall"
+    >
+        
         <intent-filter>
             <action android:name="android.telecom.ConnectionService" />
         </intent-filter>
@@ -79,6 +84,8 @@ public class MainActivity extends ReactActivity {
     // ....
 </application>
 ```
+
+Beware to choose the right `foregroundServiceType` depending on the version of Android you want to target.
 
 2. To be able to wake up your killed application when making an outgoing call form the native Phone application:
 
