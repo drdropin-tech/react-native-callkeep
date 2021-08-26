@@ -655,8 +655,10 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
             Log.w(TAG, "[VoiceConnection] openPhoneAccounts ignored due to no ConnectionService");
             return;
         }
+        
+        Log.w(TAG, "[VoiceConnection] Build Manufacturer: '" + Build.MANUFACTURER + "'");
 
-        if (Build.MANUFACTURER.equalsIgnoreCase("Samsung")) {
+        if (Build.MANUFACTURER.equalsIgnoreCase("Samsung") || Build.MANUFACTURER.equalsIgnoreCase("Oneplus")) {
             Intent intent = new Intent();
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             intent.setComponent(new ComponentName("com.android.server.telecom",
