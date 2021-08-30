@@ -791,34 +791,34 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     }
 
     private static boolean hasPhoneAccount() {
-        Log.v(TAG, "[VoiceConnection] hasPhoneAccount <Checking>"));
+        Log.v(TAG, "[VoiceConnection] hasPhoneAccount <Checking>");
         boolean hasConnectionService = isConnectionServiceAvailable();
         if(!hasConnectionService){
-            Log.v(TAG, "[VoiceConnection] isConnectionServiceAvailable: false"));
+            Log.v(TAG, "[VoiceConnection] isConnectionServiceAvailable: false");
             return false;
         }
         boolean hasTelecomManager = telecomManager != null;
         if(!hasTelecomManager){
-            Log.v(TAG, "[VoiceConnection] hasTelecomManager: false"));
+            Log.v(TAG, "[VoiceConnection] hasTelecomManager: false");
             return false;
         }
         boolean hasHandle = handle != null;
         if(!hasHandle){
-            Log.v(TAG, "[VoiceConnection] hasHandle: false"));
+            Log.v(TAG, "[VoiceConnection] hasHandle: false");
             return false;
         }
         boolean hasPhoneAccount = telecomManager.getPhoneAccount(handle) != null;
         if(!hasPhoneAccount){
-            Log.v(TAG, "[VoiceConnection] hasPhoneAccount: false"));
+            Log.v(TAG, "[VoiceConnection] hasPhoneAccount: false");
             return false;
         }
         boolean phoneAccountEnabled = telecomManager.getPhoneAccount(handle).isEnabled();
         if(!phoneAccountEnabled){
-            Log.v(TAG, "[VoiceConnection] phoneAccountEnabled: false"));
+            Log.v(TAG, "[VoiceConnection] phoneAccountEnabled: false");
             return false;
         }
 
-        Log.v(TAG, "[VoiceConnection] hasPhoneAccount: true"));
+        Log.v(TAG, "[VoiceConnection] hasPhoneAccount: true");
         return true;
     }
 
