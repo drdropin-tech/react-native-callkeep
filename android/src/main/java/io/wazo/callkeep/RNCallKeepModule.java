@@ -137,7 +137,7 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     public void setup(ReadableMap options) {
         Log.d(TAG, "[VoiceConnection] setup");
         Log.w(TAG, "[VoiceConnection] Build Manufacturer: '" + Build.MANUFACTURER + "'");
-        
+
         VoiceConnectionService.setAvailable(false);
         VoiceConnectionService.setInitialized(true);
         this._settings = options;
@@ -791,8 +791,35 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     }
 
     private static boolean hasPhoneAccount() {
-        return isConnectionServiceAvailable() && telecomManager != null
-            && telecomManager.getPhoneAccount(handle) != null && telecomManager.getPhoneAccount(handle).isEnabled();
+        Log.v(TAG, "[VoiceConnection] hasPhoneAccount <Checking>"));
+        boolean hasConnectionService = isConnectionServiceAvailable();
+        if(!hasConnectionService){
+            Log.v(TAG, "[VoiceConnection] isConnectionServiceAvailable: false"));
+            return false;
+        }
+        boolean hasTelecomManager = telecomManager != null;
+        if(!hasTelecomManager){
+            Log.v(TAG, "[VoiceConnection] hasTelecomManager: false"));
+            return false;
+        }
+        boolean hasHandle = handle != null;
+        if(!hasHandle){
+            Log.v(TAG, "[VoiceConnection] hasHandle: false"));
+            return false;
+        }
+        boolean hasPhoneAccount = telecomManager.getPhoneAccount(handle) != null;
+        if(!hasPhoneAccount){
+            Log.v(TAG, "[VoiceConnection] hasPhoneAccount: false"));
+            return false;
+        }
+        boolean phoneAccountEnabled = telecomManager.getPhoneAccount(handle).isEnabled();
+        if(!phoneAccountEnabled){
+            Log.v(TAG, "[VoiceConnection] phoneAccountEnabled: false"));
+            return false;
+        }
+
+        Log.v(TAG, "[VoiceConnection] hasPhoneAccount: true"));
+        return true;
     }
 
     private void registerReceiver() {
