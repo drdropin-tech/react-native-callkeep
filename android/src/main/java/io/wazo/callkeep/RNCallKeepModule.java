@@ -136,6 +136,8 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void setup(ReadableMap options) {
         Log.d(TAG, "[VoiceConnection] setup");
+        Log.w(TAG, "[VoiceConnection] Build Manufacturer: '" + Build.MANUFACTURER + "'");
+        
         VoiceConnectionService.setAvailable(false);
         VoiceConnectionService.setInitialized(true);
         this._settings = options;
@@ -655,8 +657,6 @@ public class RNCallKeepModule extends ReactContextBaseJavaModule {
             Log.w(TAG, "[VoiceConnection] openPhoneAccounts ignored due to no ConnectionService");
             return;
         }
-        
-        Log.w(TAG, "[VoiceConnection] Build Manufacturer: '" + Build.MANUFACTURER + "'");
 
         if (Build.MANUFACTURER.equalsIgnoreCase("Samsung") || Build.MANUFACTURER.equalsIgnoreCase("Oneplus")) {
             Intent intent = new Intent();

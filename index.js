@@ -1,6 +1,6 @@
-import { NativeModules, Platform, Alert } from 'react-native';
+import { Alert, NativeModules, Platform } from 'react-native';
+import { emit, listeners } from './actions';
 
-import { listeners, emit } from './actions';
 
 const RNCallKeepModule = NativeModules.RNCallKeep;
 const isIOS = Platform.OS === 'ios';
@@ -64,7 +64,7 @@ class RNCallKeep {
 
   hasDefaultPhoneAccount = async (options) => {
     if (!isIOS) {
-      return this._hasDefaultPhoneAccount(options);
+      return this._hasDefaultPhoneAccount(options.android);
     }
 
     return;
@@ -74,7 +74,7 @@ class RNCallKeep {
     if(isIOS) {
       return true;
     }
-    RNCallKeepModule.setup(options);
+    await setup(options);
     return await this.hasPhoneAccount();
   }
 
@@ -209,7 +209,7 @@ class RNCallKeep {
     isIOS ? RNCallKeepModule.checkSpeaker() : Promise.reject('RNCallKeep.checkSpeaker was called from unsupported OS');
 
 
-  checkPhoneAccountPermission = async (options) => await RNCallKeepModule.checkPhoneAccountPermission(options.additionalPermissions || []);
+  checkPhoneAccountPermission = async (options) => isIOS ? Promise.resolve(true) : await RNCallKeepModule.checkPhoneAccountPermission(options.android.additionalPermissions || []);
 
   setAvailable = (state) => {
     if (isIOS) {
