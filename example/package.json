@@ -9,7 +9,7 @@
     "expo": "^34.0.1",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
-    "react-native": "0.59.8",
+    "react-native": "0.62.0",
     "react-native-background-timer": "^2.1.1",
     "react-native-callkeep": "https://github.com/react-native-webrtc/react-native-callkeep#fix_outgoing_call_ios",
     "react-native-device-info": "^2.3.2",
